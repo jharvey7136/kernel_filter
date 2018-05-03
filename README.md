@@ -4,11 +4,18 @@ Kernel Filter
 ## John Harvey
 
 ### About
+The goal: write and insert into kernel code that filters a file. The filter will change 'e' to 'E' on read-only. Example: The extra excess becomes ThE Extra ExcEss. The code will run in kernel space, using 2 different methods: either via **changing code and recompiling your custom kernel** or a **loadable kernel module**.  
+
 First, i visisted kernel.org and downloaded the latest stable kernel which was 4.14.4. After that i made sure i had the required packages installed before i got started. I then configured which modules were included by running make menuconfig.  
 
 Once everything was ready, i ran make inside the root kernel directory and waited about an hour for it to compile fully. To test it out, i ran make modules_install and make install to install this newly compiled kernel on my machine. After updating the grub i was able to successfully boot into the new kernel.  
 
 Next step was to implement a custom read function in kernel space. I tried two different approaches. One was reading a file from kernel space using a loadable module, and the other implementing a custom system call in the kernel.  
+
+### Install Notes - Loadable Kernel Module
+1. Clone repo with git `git clone https://github.com/jharvey7136/kernel_filter.git`
+2. Navigate to the app's filter directory through terminal
+3. Run with command `make`
 
 #### Method 1
 
@@ -61,14 +68,28 @@ bytes = sizeof(buf);
       }
 ```
 
+### Screenshots
+**Custom system call added - line 342, number 333**  
+![Alt text](img/custom_syscall_added_num333.png)
 
+**Compiled kernel**  
+![Alt text](img/secondKernelCompile.png)
 
+**Loadable module compiled**  
+![Alt text](img/makeLoadableModuleFilter.png)
 
+**Module loaded**
+![Alt text](img/moduleLoaded.png)
 
+**Filter module loaded**
+![Alt text](img/filterModuleLoaded.png)
 
-
-
-
+### Resources
+[https://www.howtoforge.com/reading-files-from-the-linux-kernel-space-module-driver-fedora-14#reading-files-from-the-linux-kernel-space-moduledriver-fedora-]  
+[https://tnichols.org/2015/10/19/Hooking-the-Linux-System-Call-Table/]  
+[http://ytliu.info/notes/linux/file_ops_in_kernel.html]  
+[https://medium.com/@ssreehari/implementing-a-system-call-in-linux-kernel-4-7-1-6f98250a8c38]  
+[https://medium.freecodecamp.org/building-and-installing-the-latest-linux-kernel-from-source-6d8df5345980]
 
 
 
