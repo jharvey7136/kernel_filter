@@ -78,10 +78,10 @@ bytes = sizeof(buf);
 **Loadable module compiled**  
 ![Alt text](img/makeLoadableModuleFilter.png)
 
-**Module loaded**
+**Module loaded**  
 ![Alt text](img/moduleLoaded.png)
 
-**Filter module loaded**
+**Filter module loaded**  
 ![Alt text](img/filterModuleLoaded.png)
 
 ### Resources
